@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store</title>
+
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        fetch("https://fakestoreapi.com/products")
+          .then((p) => p.json())
+          .then((p) => {
+            show(p);
+          });   
+         
+
+        function show(list) {
+        const element = (
+            <div className="container">
+              <div className="row">
+                {list.map((p, i) => {
+                  return (
+                    <div key={p.id} className="col-md-6">
+                    <div>  
+                        <img src={p.image} height="100" />
+                        <div>{p.title} </div>
+                        {p.body}
+                    </div>
+                        <div>
+                            <ul>
+                            <li>${p.price}</li>
+                            </ul>
+                            <input type="button" value="Buy" />
+                        </div>
+                        <br />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        ReactDOM.render(element, document.getElementById("root"));
+        
+    }
+
+  </script>
+</body>
+</html>
+    
